@@ -1,5 +1,5 @@
 
-Aim:
+## Aim:
  
 To write a python program using OpenCV to capture the image from the web camera and do the following image manipulations.
 i) Write the frame as JPG 
@@ -9,6 +9,7 @@ iv) Rotate and display the video
 
 ## Software Used
 Anaconda - Python 3.7
+
 ## Algorithm
 ### Step 1:
 Import OpenCV Package.
@@ -30,96 +31,104 @@ End Program with 'q'. Allow the program to be terminated by pressing the 'q' key
 
 
 ## Program:
-``` Python
 ### Developed By:KRITHIGA U
 ### Register No:212223240076
-```
-## i) Write the frame as JPG file
+
+i) Write the frame as JPG file
 ```
 import cv2
-viedoCaptureObject=cv2.VideoCapture(0)
-while(True):
-    ret,frame=viedoCaptureObject.read()
-    cv2.imwrite("sharan.jpg",frame)
-    result=False
-viedoCaptureObject.release()
-cv2.destroyAllWindows()
-```
-## ii) Display the video
-```
-import numpy as np
-import cv2
-cap=cv2.VideoCapture(0)
-while True:
-    ret,frame=cap.read()
-    cv2.imshow('sharan',frame)
-    if cv2.waitKey(1)==ord('q'):
-        break
+import matplotlib.pyplot as plt
+from IPython.display import clear_output
+import time
+cap = cv2.VideoCapture(0)
+ret, frame = cap.read()
+if ret:
+    cv2.imwrite("captured_frame.jpg", frame)
 cap.release()
-cv2.destroyAllWindows()
+captured_image = cv2.imread('captured_frame.jpg')
+plt.imshow(captured_image[:,:,::-1])
+plt.title('Captured Frame')
+plt.axis('off')
+plt.show()
 ```
-## iii) Display the video by resizing the window
+ii) Display the video
 ```
-import numpy as np
-import cv2
-cap=cv2.VideoCapture(0)
-while True:
-    ret,frame=cap.read()
-    width=int(cap.get(3))
-    height=int(cap.get(4))
-    image=np.zeros(frame.shape,np.uint8)
-    smaller_frame=cv2.resize(frame,(0,0),fx=0.5,fy=0.5)
-    image[:height//2, :width//2]=smaller_frame
-    image[height//2:, :width//2]=smaller_frame
-    image[:height//2, width//2:]=smaller_frame
-    image[height//2:, width//2:]=smaller_frame
-    cv2.imshow('212222240097-SHARAN-MJ',image)
-    if cv2.waitKey(1)==ord('q'):
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
         break
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis('off')
+    plt.show()
+    time.sleep(0.05)
+
 cap.release()
-cv2.destroyAllWindows()
 ```
-## iv) Rotate and display the video
+iii) Display the video by resizing the window
 ```
-import numpy as np
-import cv2
-cap=cv2.VideoCapture(0)
-while True:
-    ret,frame=cap.read()
-    width=int(cap.get(3))
-    height=int(cap.get(4))
-    image=np.zeros(frame.shape,np.uint8)
-    smaller_frame=cv2.resize(frame,(0,0),fx=0.5,fy=0.5)
-    image[:height//2, :width//2]=cv2.rotate(smaller_frame,cv2.ROTATE_180)
-    image[height//2:, :width//2]=smaller_frame
-    image[:height//2, width//2:]=cv2.rotate(smaller_frame,cv2.ROTATE_180)
-    image[height//2:, width//2:]=smaller_frame
-    cv2.imshow('212222240097-SHARAN-MJ',image)
-    if cv2.waitKey(1)==ord('q'):
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
         break
+    resized_frame = cv2.resize(frame, (100, 150))  # Resize to 320x240
+    frame_rgb = cv2.cvtColor(resized_frame, cv2.COLOR_BGR2RGB)
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis('off')
+    plt.show()
+    time.sleep(0.05)
+
 cap.release()
-cv2.destroyAllWindows()
+```
+iv) Rotate and display the video
+```
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
+        break
+    rotated_frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+    frame_rgb = cv2.cvtColor(rotated_frame, cv2.COLOR_BGR2RGB)
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis('off')
+    plt.show()
+    time.sleep(0.05)
+
+cap.release()
+
+ 
 ```
 ## Output
 
-### i) Write the frame as JPG image
+### i) Captured frame
 
-![Screenshot 2025-04-05 164152](https://github.com/user-attachments/assets/a0a2b1be-93b2-417b-bb19-bd554ec73577)
+![{67F96249-C773-490C-9086-D0B498B19F53}](https://github.com/user-attachments/assets/9003a60a-6ff9-48bd-b514-6523754c4262)
+
 
 
 ### ii) Display the video
 
-![Screenshot 2025-04-05 164645](https://github.com/user-attachments/assets/cf2238ef-bc85-4a9f-9247-2671b9ec334f)
+![{205ECCD2-57DB-437D-96B3-2077ADB87EA1}](https://github.com/user-attachments/assets/b2d92949-509c-44c7-8063-060245832677)
 
 
 ### iii) Display the video by resizing the window
 
-![Screenshot 2025-04-05 164305](https://github.com/user-attachments/assets/71932cbd-b8bb-4fa1-9eee-653c365b8a6c)
+![{8E34B231-A46D-4073-8C24-5FCDE26CE941}](https://github.com/user-attachments/assets/05240388-83c5-43b1-b7af-141ed304dbd5)
+
 
 
 ### iv) Rotate and display the video
 
-![Screenshot 2025-04-05 164403](https://github.com/user-attachments/assets/e68a53b5-9750-4545-8cac-aaa68342caa3)
+![{27E03443-32A0-4DD9-A3B2-6E27078D1BAD}](https://github.com/user-attachments/assets/d1b80537-1733-40ce-9444-0ac73e8fae07)
+
 
 
 ## Result:
